@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <body style='margin : 0px; overflow: hidden;'>
+        <a-scene embedded arjs="debugUIEnabled: false;">
         <a-assets>
             <img id="asset"></img>
         </a-assets>
-        <a-scene embedded arjs="debugUIEnabled: false;">
         <a-marker type="pattern" preset="custom" url="pattern.patt" vidhandler>
             <a-image src="#asset" position="0 0 0" scale="1 1 1" width="2" rotation="-90 0 0"></a-image>
         </a-marker>

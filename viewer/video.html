@@ -25,10 +25,10 @@
         });
     </script>
     <body style='margin : 0px; overflow: hidden;'>
-        <a-assets>
-            <video id="asset" autoplay loop="true" src="/review1.mp4"></video>
-        </a-assets>
         <a-scene embedded arjs="debugUIEnabled: false;">
+        <a-assets>
+            <video id="asset" autoplay loop="true"></video>
+        </a-assets>
         <a-marker type="pattern" preset="custom" url="/pattern-review1.patt" vidhandler>
             <a-video src="#asset" position="0 0 0" scale="1 1 1" width="2" rotation="-90 0 0" play="true"></a-video>
         </a-marker>
