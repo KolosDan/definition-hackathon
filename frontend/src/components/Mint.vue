@@ -1,12 +1,8 @@
 <template>
   <div>
-    <div v-if="ethAvailable" style="height: 90vh;">
+    <div style="height: 90vh;">
       <div style="position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
-        <div v-if="accounts.length == 0">
-            <p style="font-size: 36px; font-weight: 400;">It seems you have not connected your MetaMask. Go on... We'll wait.</p>
-            <button @click="connect" class="btn btn-primary px-3 py-3" style="border-radius: 20px; font-size: 64px; font-weight: 600;">Connect</button>
-        </div>
-        <div v-else>
+        <div>
           <p style="font-size: 36px; font-weight: 400;">Create your asset</p>
           <form @submit.prevent="mint">
             <div class="form-group">
@@ -59,9 +55,6 @@
         </div>
       </div>
     </div>
-    <div v-else style="position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
-      <p style="font-size: 36px; font-weight: 400;">Please install metamask to proceed</p>
-    </div>
   </div>
 </template>
 
@@ -80,7 +73,6 @@ export default {
       contractAddress: "0x516b22bd55c88bb86044adbedef16be22e7d4b4a",
       provider: undefined,
       sdk: undefined,
-      ethAvailable: false,
       accounts: [],
       ipfsClient: undefined,
 
@@ -184,15 +176,20 @@ export default {
 
     if (provider) {
       this.provider = provider
-      this.ethAvailable = true
       
-      if (!localStorage.accountsProvided) {
-        try {
+      if (localStorage.getItem("loggedIn") == "true") {
+        try {  
           await this.connect()
-        } catch (e) {
-          console.log(e)
+        } catch(e) {
+          alert(e)
+          localStorage.setItem("loggedIn", false)
+          window.location.replace("/#/login")
         }
+      } else {
+        window.location.replace("/#/login")
       }
+    } else {
+      window.location.replace("/#/login")
     }
   }
 

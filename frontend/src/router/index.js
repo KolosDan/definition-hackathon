@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Mint from '../components/Mint.vue'
 import Index from '../components/Index.vue'
 import Profile from '../components/Profile.vue'
+import Login from '../components/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 
