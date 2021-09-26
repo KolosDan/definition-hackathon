@@ -167,17 +167,18 @@ export default {
           lazy: true
         })
         console.log(res)
-        const content = window.btoa(unescape(encodeURIComponent( JSON.stringify(this.form.content) )))
+        const content = JSON.stringify(this.form.content)
         const lockedContent = `I would like to set lock for ${res.itemId}. content is ${content}`
         const signatureResult = await this.provider.send("personal_sign", [lockedContent, this.accounts[0]])
         
         const lockBody = {
-          content: this.form.content.value,
+          content: lockedContent,
           signature: toBinary(signatureResult.result),
           signer: toAddress(this.accounts[0])
         }
 
-        await fetch(`https://api-ropsten.rarible.com/marketplace/api/v4/items/${res.itemId}/lock`, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(lockBody)})
+        const lres = await fetch(`https://api-ropsten.rarible.com/marketplace/api/v4/items/${res.itemId}/lock`, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(lockBody)})
+        console.log(lres)
         alert("Asset created successfully!")
         window.location.replace("/#/profile")
     }

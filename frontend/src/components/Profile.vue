@@ -55,6 +55,7 @@ export default {
         getTokens: async function() {
             const tokenResp = await fetch(`https://api-dev.rarible.com/protocol/v0.1/ethereum/nft/items/byOwner?owner=${this.accounts[0]}&includeMeta=true`).then((resp) => resp.json())
             this.tokens = tokenResp.items.filter(t => t.contract == this.contractAddress)
+            console.log(this.tokens)
         }
     },
 
