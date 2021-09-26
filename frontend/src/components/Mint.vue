@@ -167,7 +167,7 @@ export default {
           lazy: true
         })
         console.log(res)
-        const content = JSON.stringify(this.form.content)
+        const content = this.form.content.value
         const lockedContent = `I would like to set lock for ${res.itemId}. content is ${content}`
         const signatureResult = await this.provider.send("personal_sign", [lockedContent, this.accounts[0]])
         
