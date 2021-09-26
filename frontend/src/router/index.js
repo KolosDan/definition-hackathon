@@ -4,6 +4,7 @@ import Mint from '../components/Mint.vue'
 import Index from '../components/Index.vue'
 import Profile from '../components/Profile.vue'
 import Login from '../components/Login.vue'
+import Viewer from '../components/Viewer.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,10 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/viewer/:id',
+    component: Viewer
   }
 ]
 

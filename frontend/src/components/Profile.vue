@@ -15,6 +15,7 @@
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn btn-primary mx-3">Manage</a>
+                            <router-link :to="'/viewer/' + t.id" class="btn btn-success mx-3">View</router-link>
                         </div>
                     </div>
                 </div>
@@ -50,6 +51,7 @@ export default {
             const web3 = new Web3(this.provider)
             this.sdk = createRaribleSdk(new Web3Ethereum({ web3 }), "ropsten")
         },
+        
         getTokens: async function() {
             const tokenResp = await fetch(`https://api-dev.rarible.com/protocol/v0.1/ethereum/nft/items/byOwner?owner=${this.accounts[0]}&includeMeta=true`).then((resp) => resp.json())
             this.tokens = tokenResp.items.filter(t => t.contract == this.contractAddress)
