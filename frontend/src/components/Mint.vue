@@ -177,7 +177,8 @@ export default {
           signer: toAddress(this.accounts[0])
         }
 
-        await fetch(`https://api-ropsten.rarible.com/marketplace/api/v4/items/${res.itemId}/lock`, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(lockBody)})
+        const lres = await fetch(`https://api-ropsten.rarible.com/marketplace/api/v4/items/${res.itemId}/lock`, {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify(lockBody)}).then((r) => r.json())
+        console.log(lres)
     }
   },
 
