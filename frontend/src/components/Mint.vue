@@ -49,8 +49,14 @@
               <label class="form-text">Preview image/video: </label>
               <input @change="uploadPreview" class="form-control-file" type="file" accept="image/*, video/mp4">
             </div>
-            <button v-if="!mintRequestSent" type="submit" class="btn btn-primary">Create!</button>
-            <p v-else>Loading...</p>
+            <div v-if="!fileLoading && !previewLoading">
+              <button v-if="!mintRequestSent" type="submit" class="btn btn-primary">Create!</button>
+              <p v-else>Loading...</p>
+            </div>
+            <div v-else>
+              <p>File upload in progress...</p>
+              <button v-if="!mintRequestSent" disabled type="submit" class="btn btn-secondary">Create!</button>
+            </div>
           </form>
         </div>
       </div>
@@ -75,10 +81,14 @@ export default {
       sdk: undefined,
       accounts: [],
       ipfsClient: undefined,
+      fileLoading: false,
+      previewLoading: false,
 
       types: [
         {text: "Text", value: "text"},
         {text: "URL", value: "url"},
+        {text: "Twitch", value: "twitch"},
+        {text: "YouTube", value: "youtube"},
         {text: "Image", value: "image"},
         {text: "Video", value: "video"},
       ],
@@ -110,11 +120,15 @@ export default {
     },
 
     uploadPreview: async function(e) {
+      this.previewLoading = true
       this.form.preview = e.target.files[0]
+      this.previewLoading = false
     },
 
     uploadContent: async function(e) {
-      this.form.content.value = e.target.files[0]
+      this.fileLoading = true
+      this.form.content.value = await this.uploadToIpfs(e.target.files[0]);
+      this.fileLoading = false
     },
 
     uploadToIpfs: async function(data) {
@@ -128,7 +142,6 @@ export default {
         var toMint = {
           name: this.form.name,
           description: this.form.description,
-          locked: this.form.content.value,
           lockAble: true,
           attributes: [],
         }
@@ -154,7 +167,8 @@ export default {
           lazy: true
         })
         console.log(res)
-        const lockedContent = `I would like to set lock for ${res.itemId}. content is ${this.form.content.value}`
+        const content = window.btoa(unescape(encodeURIComponent( JSON.stringify(this.form.content) )))
+        const lockedContent = `I would like to set lock for ${res.itemId}. content is ${content}`
         const signatureResult = await this.provider.send("personal_sign", [lockedContent, this.accounts[0]])
         
         const lockBody = {

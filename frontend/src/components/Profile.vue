@@ -4,15 +4,17 @@
             <h2 class="mt-3" style="font-size: 48px; text-align: center; font-weight: 800;">Your assets</h2>
 
             <div class="row mt-5">
-                <div class="col-lg-4 d-flex align-items-stretch" v-for="t in tokens" :key="t.id">
+                <div class="col-lg-4 d-flex align-items-stretch mb-3" v-for="t in tokens" :key="t.id">
                     <div class="card" style="width: 25rem;">
-                        <img class="card-img-top" :src="'https://ipfs.io/ipfs/' + t.meta.image.url.ORIGINAL">
+                        <div v-if="t.meta.image">
+                            <img class="card-img-top" :src="'https://ipfs.io/ipfs/' + t.meta.image.url.ORIGINAL">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ t.meta.name }}</h5>
                             <p class="card-text">{{ t.meta.description }}</p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Manage</a>
+                            <a href="#" class="btn btn-primary mx-3">Manage</a>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,50 @@
+<!doctype HTML>
+<html>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <body style='margin : 0px; overflow: hidden;'>
+        <a-assets>
+            <img id="asset"></img>
+        </a-assets>
+        <a-scene embedded arjs="debugUIEnabled: false;">
+        <a-marker type="pattern" preset="custom" url="/pattern.patt" vidhandler>
+            <a-image src="#asset" position="0 0 0" scale="1 1 1" width="2" rotation="-90 0 0"></a-image>
+        </a-marker>
+        <a-entity camera></a-entity>
+        </a-scene>
+        <div id="confirm" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Начать демонстрацию?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Нажмите на кнопку "Начать", и наведите открывшуюся камеру на метку Play_, чтобы начать визуализацию.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="start()">Начать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            window.onload = function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                document.getElementById("asset").src = "https://ipfs.io/ipfs/" + urlParams.get("asset")
+                $('#confirm').modal('toggle');
+            }
+            function start() {
+                $('#confirm').modal('toggle');
+            }
+        </script>
+    </body>
+</html>%

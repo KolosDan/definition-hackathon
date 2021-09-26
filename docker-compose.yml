@@ -9,3 +9,8 @@ services:
       - 443:443
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
+
+  viewer:
+    build:
+      context: viewer/
+  
