@@ -31,7 +31,7 @@ export default {
         },
 
         getToken: async function() {
-            const tokenData = await fetch(`https://api-dev.rarible.com/protocol/v0.1/ethereum/nft-order/items/${this.itemId}?includeMeta=true`).then((res) => res.json())
+            const tokenData = await fetch(`https://api-ropsten.rarible.com/protocol/v0.1/ethereum/nft-order/items/${this.itemId}?includeMeta=true`)
             console.log(tokenData)
         }
     },
