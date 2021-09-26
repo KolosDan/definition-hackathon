@@ -1,0 +1,59 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
+    "@rarible/ethereum-provider": "^0.4.0",
+    "@rarible/protocol-api-client": "^0.1.7",
+    "@rarible/protocol-ethereum-sdk": "^0.3.2",
+    "@rarible/types": "^0.1.7",
+    "@rarible/web3-ethereum": "^0.4.0",
+    "bootstrap": "^5.1.1",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.6.5",
+    "eth-sig-util": "^3.0.1",
+    "ethereumjs-util": "^7.1.0",
+    "ethers": "^5.4.7",
+    "ipfs-http-client": "^53.0.0",
+    "node-fetch": "^3.0.0",
+    "tslib": "^2.3.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.2",
+    "web3": "^1.5.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
